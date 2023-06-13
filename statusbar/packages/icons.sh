@@ -44,11 +44,37 @@ call_menu() {
     esac
 }
 
+update_wallpaper_state() {
+    _wallpaper=''
+    source $tempfile                                                      # 从 temp 文件中读取模块的状态
+    if [ "$_wallpaper" = 'r' ]; then
+        sed -i '/^export _wallpaper=.*$/d' $tempfile
+        printf "export _wallpaper=\"n\"\n" >> $tempfile
+        notify-send " wallpaper" "\nN模式" -r 9527
+    else
+        sed -i '/^export _wallpaper=.*$/d' $tempfile
+        printf "export _wallpaper=\"r\"\n" >> $tempfile
+        notify-send " wallpaper" "\nR模式" -r 9527
+    fi
+
+}
+
+update_wallpaper() {
+    _wallpaper=''
+    source $tempfile                                                      # 从 temp 文件中读取模块的状态
+    if [ "$_wallpaper" = 'r' ]; then
+        feh --randomize --bg-fill ~/Pictures/wallpaper/*
+    else
+        feh --randomize --bg-fill ~/Pictures/nwallpaper/*
+    fi
+}
+
 click() {
     case "$1" in
         # L) notify; feh --randomize --bg-fill ~/Pictures/wallpaper/* ;;
-        L) feh --randomize --bg-fill ~/Pictures/wallpaper/* ;;
-        R) feh --bg-fill ~/Pictures/wallpaper/2c3f9df25b784069da8cfa34a182eb43.jpg ;;
+        L) update_wallpaper ;;
+        R) update_wallpaper_state ;;
+        # R) feh --bg-fill ~/Pictures/wallpaper/2c3f9df25b784069da8cfa34a182eb43.jpg ;;
         # R) call_menu ;;
     esac
 }

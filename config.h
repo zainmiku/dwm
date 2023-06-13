@@ -81,7 +81,7 @@ static const Rule rules[] = {
     /** 优先级高 越在上面优先度越高 */
     { NULL,                  NULL,                "图片查看器",      0,            1,          0,          0,        -1,      0}, // qq图片查看器        浮动
     { NULL,                  NULL,                "图片查看",        0,            1,          0,          0,        -1,      0}, // 微信图片查看器      浮动
-    { "mpv",                 "mpv",               NULL,              0,            1,          0,          1,        -1,      0}, // mpv                 浮动
+    { "mpv",                 "mpv",               NULL,              0,            1,          0,          1,        -1,      0}, // mpv                 浮动无边框
     { "crx__jjfgljkjddpcpfapejfkelkbjbehagbh",                 "crx__jjfgljkjddpcpfapejfkelkbjbehagbh",                NULL,              0,            1,          0,          1,        -1,      0}, //                  浮动
 
     /** 普通优先度 */
