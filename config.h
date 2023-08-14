@@ -6,10 +6,10 @@ static const unsigned int borderpx       = 2;         /* 窗口边框大小 */
 static const unsigned int systraypinning = 1;         /* 托盘跟随的显示器 0代表不指定显示器 */
 static const unsigned int systrayspacing = 0;         /* 托盘间距 */
 static const unsigned int systrayspadding = 5;        /* 托盘和状态栏的间隙 */
-static int gappi                         = 12;        /* 窗口与窗口 缝隙大小 */
-static int gappo                         = 12;        /* 窗口与边缘 缝隙大小 */
-static const int _gappo                  = 12;        /* 窗口与窗口 缝隙大小 不可变 用于恢复时的默认值 */
-static const int _gappi                  = 12;        /* 窗口与边缘 缝隙大小 不可变 用于恢复时的默认值 */
+static int gappi                         = 8;        /* 窗口与窗口 缝隙大小 */
+static int gappo                         = 8;        /* 窗口与边缘 缝隙大小 */
+static const int _gappo                  = 8;        /* 窗口与窗口 缝隙大小 不可变 用于恢复时的默认值 */
+static const int _gappi                  = 8;        /* 窗口与边缘 缝隙大小 不可变 用于恢复时的默认值 */
 static const int vertpad                 = 0;         /* vertical padding of bar */
 static const int sidepad                 = 5;         /* horizontal padding of bar */
 static const int overviewgappi           = 24;        /* overview时 窗口与边缘 缝隙大小 */
@@ -189,22 +189,29 @@ static Key keys[] = {
     { MODKEY|ShiftMask,    XK_l,            exchange_client,  {.i = RIGHT } },           /* super shift l      | 二维交换窗口 (仅平铺) */
 
     /* spawn + SHCMD 执行对应命令(已下部分建议完全自己重新定义) */
-    { ControlMask|Mod1Mask,XK_p,        spawn, SHCMD("mpc toggle && $DWM/statusbar/statusbar.sh update music") },                                          /* ctrl alt p       | mpd音乐播放暂停        */
-    { ControlMask|Mod1Mask,XK_Left,     spawn, SHCMD("mpc prev && $DWM/statusbar/statusbar.sh update music") },                                          /* ctrl alt left       | mpd音乐上一首        */
-    { ControlMask|Mod1Mask,XK_Right,    spawn, SHCMD("mpc next && $DWM/statusbar/statusbar.sh update music") },                                          /* ctrl alt right       | mpd音乐下一首        */
-    { MODKEY,              XK_s,      togglescratch, SHCMD("st -t scratchpad -c float") },                      /* super s          | 打开scratch终端        */
-    { MODKEY,              XK_Return, spawn, SHCMD("st") },                                                     /* super enter      | 打开st终端             */
-    { MODKEY,              XK_minus,  spawn, SHCMD("st -c FG") },                                               /* super -          | 打开全局st终端         */
-    { MODKEY,              XK_space,  spawn, SHCMD("st -c float") },                                            /* super space      | 打开浮动st终端         */
-    { MODKEY,              XK_F1,     spawn, SHCMD("killall pcmanfm || pcmanfm") },                             /* super F1         | 打开/关闭pcmanfm       */
-    { MODKEY,              XK_d,      spawn, SHCMD("rofi -show drun") },                                        /* super d          | rofi: 执行drun         */
-    { MODKEY,              XK_p,      spawn, SHCMD("rofi -show  -modi :~/scripts/rofi.sh") },                 /* super p          | rofi: 执行自定义脚本   */
-    { MODKEY,              XK_x,      spawn, SHCMD("~/scripts/rofi_power.sh") },                                /* super x          | rofi: 执行自定义脚本   */
-    { MODKEY,              XK_n,      spawn, SHCMD("$DWM/DEF/blurlock.sh") },                                   /* super n          | 锁定屏幕               */
-    { MODKEY|ShiftMask,    XK_Up,     spawn, SHCMD("$DWM/DEF/set_vol.sh up") },                                 /* super shift up   | 音量加                 */
-    { MODKEY|ShiftMask,    XK_Down,   spawn, SHCMD("$DWM/DEF/set_vol.sh down") },                               /* super shift down | 音量减                 */
-    { MODKEY|ShiftMask,    XK_a,      spawn, SHCMD("flameshot gui -c -p ~/Pictures/screenshots") },             /* super shift a    | 截图                   */
-    { MODKEY|ShiftMask,    XK_q,      spawn, SHCMD("kill -9 $(xprop | grep _NET_WM_PID | awk '{print $3}')") }, /* super shift q    | 选中某个窗口并强制kill */
+    { ControlMask|Mod1Mask,XK_p,        spawn, SHCMD("mpc toggle && $DWM/statusbar/statusbar.sh update music") },/* ctrl alt p       | mpd音乐播放暂停        */
+    { ControlMask|Mod1Mask,XK_Left,     spawn, SHCMD("mpc prev && $DWM/statusbar/statusbar.sh update music") },  /* ctrl alt left    | mpd音乐上一首        */
+    { ControlMask|Mod1Mask,XK_Right,    spawn, SHCMD("mpc next && $DWM/statusbar/statusbar.sh update music") },  /* ctrl alt right   | mpd音乐下一首        */
+    { 0,    XF86XK_AudioPlay,           spawn, SHCMD("mpc toggle && $DWM/statusbar/statusbar.sh update music") },/* 暂停键           | mpd音乐下一首        */
+    { 0,    XF86XK_AudioNext,           spawn, SHCMD("mpc prev && $DWM/statusbar/statusbar.sh update music") },  /* 下一首键         | mpd音乐上一首        */
+    { 0,    XF86XK_AudioPrev,           spawn, SHCMD("mpc next && $DWM/statusbar/statusbar.sh update music") },  /* 上一首键         | mpd音乐下一首        */
+
+    { MODKEY,              XK_s,      togglescratch, SHCMD("st -t scratchpad -c float") },                       /* super s          | 打开scratch终端        */
+    { MODKEY,              XK_Return, spawn, SHCMD("st") },                                                      /* super enter      | 打开st终端             */
+    { MODKEY,              XK_minus,  spawn, SHCMD("st -c FG") },                                                /* super -          | 打开全局st终端         */
+    { MODKEY,              XK_space,  spawn, SHCMD("st -c float") },                                             /* super space      | 打开浮动st终端         */
+    { MODKEY,              XK_F1,     spawn, SHCMD("killall pcmanfm || pcmanfm") },                              /* super F1         | 打开/关闭pcmanfm       */
+    { MODKEY,              XK_d,      spawn, SHCMD("rofi -show drun") },                                         /* super d          | rofi: 执行drun         */
+    { MODKEY,              XK_p,      spawn, SHCMD("rofi -show  -modi :~/scripts/rofi.sh") },                  /* super p          | rofi: 执行自定义脚本   */
+    { MODKEY,              XK_x,      spawn, SHCMD("~/scripts/rofi_power.sh") },                                 /* super x          | rofi: 执行自定义脚本   */
+    { MODKEY,              XK_n,      spawn, SHCMD("$DWM/DEF/blurlock.sh") },                                    /* super n          | 锁定屏幕               */
+    { MODKEY|ShiftMask,    XK_Up,     spawn, SHCMD("$DWM/DEF/set_vol.sh up") },                                  /* super shift up   | 音量加                 */
+    { MODKEY|ShiftMask,    XK_Down,   spawn, SHCMD("$DWM/DEF/set_vol.sh down") },                                /* super shift down | 音量减                 */
+    { 0,   XF86XK_AudioRaiseVolume,     spawn, SHCMD("$DWM/DEF/set_vol.sh up") },                                /* 键盘旋钮         | 音量加                 */
+    { 0,   XF86XK_AudioLowerVolume,     spawn, SHCMD("$DWM/DEF/set_vol.sh down") },                              /* 键盘旋钮         | 音量减                 */
+    { MODKEY|ShiftMask,    XK_a,      spawn, SHCMD("flameshot gui -c -p ~/Pictures/screenshots") },              /* super shift a    | 截图                   */
+    { MODKEY|ShiftMask,    XK_q,      spawn, SHCMD("kill -9 $(xprop | grep _NET_WM_PID | awk '{print $3}')") },  /* super shift q    | 选中某个窗口并强制kill */
+    { MODKEY,              XK_F8,     spawn, SHCMD("~/scripts/screenkey.sh") },                                  /* super  F8        | 显示按键               */
 
     /* super key : 跳转到对应tag (可附加一条命令 若目标目录无窗口，则执行该命令) */
     /* super shift key : 将聚焦窗口移动到对应tag */
@@ -217,7 +224,7 @@ static Key keys[] = {
         TAGKEYS(XK_e, 5, "microsoft-edge-stable")
         TAGKEYS(XK_m, 6, "st -A 0.7 -t music -c FN -e ncmpcpp &")
         TAGKEYS(XK_0, 7, "linuxqq")
-        TAGKEYS(XK_w, 8, "st -c noborder -e joshuto")
+        TAGKEYS(XK_w, 8, "st -c noborder -e ~/.config/joshuto/joshuto.sh")
         TAGKEYS(XK_y, 9, "telegram-desktop")
 };
 

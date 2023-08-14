@@ -14,9 +14,9 @@ settings() {
     amixer sset master unmute
     amixer sset speaker unmute
     amixer sset headphone unmute
-    ~/scripts/set_screen.sh two               # 设置显示器
-    printf "export _wallpaper='n'\n"  >> $tempfile
-    $DWM/statusbar/packages/icons.sh click L
+    # ~/scripts/set_screen.sh two               # 设置显示器
+    feh --bg-fill ~/Pictures/nwallpaper/2c3f9df25b784069da8cfa34a182eb43.jpg
+    # $DWM/statusbar/statusbar.sh icons L
 }
 
 daemons() {
@@ -40,7 +40,7 @@ cron() {
     let i=10
     while true; do
         # [ $((i % 10)) -eq 0 ] && ~/scripts/set_screen.sh check # 每10秒检查显示器状态 以此自动设置显示器
-        [ $((i % 300)) -eq 0 ] && $DWM/statusbar/packages/icons.sh click L # 每600秒更新壁纸
+        # [ $((i % 600)) -eq 0 ] && $DWM/statusbar/packages/icons.sh click L # 每600秒更新壁纸
         sleep 10; let i+=10
     done
 }

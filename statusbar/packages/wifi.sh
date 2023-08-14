@@ -11,7 +11,7 @@ signal=$(echo "^s$this^" | sed 's/_//')
 [ ! "$(command -v nmcli)" ] && echo command not found: nmcli && exit
 
 # 中英文适配
-wifi_grep_keyword="已连接 到"
+wifi_grep_keyword="已连接 到 "
 wifi_disconnected="未连接"
 wifi_disconnected_notify="未连接到网络"
 if [ "$LANG" != "zh_CN.UTF-8" ]; then
@@ -22,7 +22,7 @@ fi
 
 update() {
     wifi_icon="󰤨"
-    wifi_text=$(nmcli | grep "$wifi_grep_keyword" | sed "s/$wifi_grep_keyword//" | awk '{print $2}' | paste -d " " -s)
+    wifi_text=$(nmcli | grep "$wifi_grep_keyword" | awk -F "$wifi_grep_keyword" '{print $2}')
     [ "$wifi_text" = "" ] && wifi_text=$wifi_disconnected
 
     icon=" $wifi_icon "
