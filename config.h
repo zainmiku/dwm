@@ -192,7 +192,13 @@ static Key keys[] = {
     { ControlMask|Mod1Mask,XK_p,        spawn, SHCMD("mpc toggle && $DWM/statusbar/statusbar.sh update music") },/* ctrl alt p       | mpd音乐播放暂停        */
     { ControlMask|Mod1Mask,XK_Left,     spawn, SHCMD("mpc prev && $DWM/statusbar/statusbar.sh update music") },  /* ctrl alt left    | mpd音乐上一首        */
     { ControlMask|Mod1Mask,XK_Right,    spawn, SHCMD("mpc next && $DWM/statusbar/statusbar.sh update music") },  /* ctrl alt right   | mpd音乐下一首        */
+
+    { MODKEY,XF86XK_AudioRaiseVolume,   spawn, SHCMD("mpc next && $DWM/statusbar/statusbar.sh update music") },  /* ctrl alt left    | mpd音乐上一首        */
+    { MODKEY,XF86XK_AudioLowerVolume,   spawn, SHCMD("mpc prev && $DWM/statusbar/statusbar.sh update music") },  /* ctrl alt right   | mpd音乐下一首        */
+    { MODKEY,    XF86XK_AudioMute,      spawn, SHCMD("mpc toggle && $DWM/statusbar/statusbar.sh update music") },/* 暂停键           | mpd音乐下一首        */
     { 0,    XF86XK_AudioPlay,           spawn, SHCMD("mpc toggle && $DWM/statusbar/statusbar.sh update music") },/* 暂停键           | mpd音乐下一首        */
+    { 0,    XF86XK_AudioMute,           spawn, SHCMD("$DWM/statusbar/statusbar.sh vol M") },                     /* 暂停键           | mpd音乐下一首        */
+
     { 0,    XF86XK_AudioNext,           spawn, SHCMD("mpc prev && $DWM/statusbar/statusbar.sh update music") },  /* 下一首键         | mpd音乐上一首        */
     { 0,    XF86XK_AudioPrev,           spawn, SHCMD("mpc next && $DWM/statusbar/statusbar.sh update music") },  /* 上一首键         | mpd音乐下一首        */
 

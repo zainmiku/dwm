@@ -30,8 +30,8 @@ daemons() {
     dunst -conf ~/scripts/config/dunst.conf & # 开启通知server
     picom --config ~/scripts/config/picom.conf >> /dev/null 2>&1 & # 开启picom
     # 显卡切换
-    # /usr/bin/prime-offload &
-    # optimus-manager-qt &
+    /usr/bin/prime-offload &
+    optimus-manager-qt &
     $HOME/.config/clash/start-clash.sh edu > /dev/null 2>&1 &
 }
 
