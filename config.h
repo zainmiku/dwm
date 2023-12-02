@@ -189,18 +189,19 @@ static Key keys[] = {
     { MODKEY|ShiftMask,    XK_l,            exchange_client,  {.i = RIGHT } },           /* super shift l      | 二维交换窗口 (仅平铺) */
 
     /* spawn + SHCMD 执行对应命令(已下部分建议完全自己重新定义) */
-    { ControlMask|Mod1Mask,XK_p,        spawn, SHCMD("mpc toggle && $DWM/statusbar/statusbar.sh update music") },/* ctrl alt p       | mpd音乐播放暂停        */
-    { ControlMask|Mod1Mask,XK_Left,     spawn, SHCMD("mpc prev && $DWM/statusbar/statusbar.sh update music") },  /* ctrl alt left    | mpd音乐上一首        */
-    { ControlMask|Mod1Mask,XK_Right,    spawn, SHCMD("mpc next && $DWM/statusbar/statusbar.sh update music") },  /* ctrl alt right   | mpd音乐下一首        */
+    { ControlMask|Mod1Mask,XK_p,        spawn, SHCMD("$DWM/statusbar/statusbar.sh music R") },  /* ctrl alt p       | 音乐播放暂停      */
+    { ControlMask|Mod1Mask,XK_Left,     spawn, SHCMD("$DWM/statusbar/statusbar.sh music U") },  /* ctrl alt left    | 音乐上一首        */
+    { ControlMask|Mod1Mask,XK_Right,    spawn, SHCMD("$DWM/statusbar/statusbar.sh music D") },  /* ctrl alt right   | 音乐下一首        */
 
-    { MODKEY,XF86XK_AudioRaiseVolume,   spawn, SHCMD("mpc next && $DWM/statusbar/statusbar.sh update music") },  /* ctrl alt left    | mpd音乐上一首        */
-    { MODKEY,XF86XK_AudioLowerVolume,   spawn, SHCMD("mpc prev && $DWM/statusbar/statusbar.sh update music") },  /* ctrl alt right   | mpd音乐下一首        */
-    { MODKEY,    XF86XK_AudioMute,      spawn, SHCMD("mpc toggle && $DWM/statusbar/statusbar.sh update music") },/* 暂停键           | mpd音乐下一首        */
-    { 0,    XF86XK_AudioPlay,           spawn, SHCMD("mpc toggle && $DWM/statusbar/statusbar.sh update music") },/* 暂停键           | mpd音乐下一首        */
-    { 0,    XF86XK_AudioMute,           spawn, SHCMD("$DWM/statusbar/statusbar.sh vol M") },                     /* 暂停键           | mpd音乐下一首        */
+    { MODKEY,    XF86XK_AudioMute,      spawn, SHCMD("$DWM/statusbar/statusbar.sh music R") },  /* super 静音键     | 音乐播放暂停      */
+    { MODKEY,XF86XK_AudioRaiseVolume,   spawn, SHCMD("$DWM/statusbar/statusbar.sh music D") },  /* ctrl alt left    | 音乐下一首        */
+    { MODKEY,XF86XK_AudioLowerVolume,   spawn, SHCMD("$DWM/statusbar/statusbar.sh music U") },  /* ctrl alt right   | 音乐上一首        */
 
-    { 0,    XF86XK_AudioNext,           spawn, SHCMD("mpc prev && $DWM/statusbar/statusbar.sh update music") },  /* 下一首键         | mpd音乐上一首        */
-    { 0,    XF86XK_AudioPrev,           spawn, SHCMD("mpc next && $DWM/statusbar/statusbar.sh update music") },  /* 上一首键         | mpd音乐下一首        */
+    { 0,    XF86XK_AudioPlay,           spawn, SHCMD("$DWM/statusbar/statusbar.sh music R") },  /* 暂停键           | 音乐播放暂停      */
+    { 0,    XF86XK_AudioMute,           spawn, SHCMD("$DWM/statusbar/statusbar.sh vol M") },    /* 暂停键           | 静音              */
+
+    { 0,    XF86XK_AudioNext,           spawn, SHCMD("$DWM/statusbar/statusbar.sh music D") },  /* 下一首键         | 音乐下一首        */
+    { 0,    XF86XK_AudioPrev,           spawn, SHCMD("$DWM/statusbar/statusbar.sh music U") },  /* 上一首键         | 音乐上一首        */
 
     { MODKEY,              XK_s,      togglescratch, SHCMD("st -t scratchpad -c float") },                       /* super s          | 打开scratch终端        */
     { MODKEY,              XK_Return, spawn, SHCMD("st") },                                                      /* super enter      | 打开st终端             */
@@ -218,6 +219,9 @@ static Key keys[] = {
     { MODKEY|ShiftMask,    XK_a,      spawn, SHCMD("flameshot gui -c -p ~/Pictures/screenshots") },              /* super shift a    | 截图                   */
     { MODKEY|ShiftMask,    XK_q,      spawn, SHCMD("kill -9 $(xprop | grep _NET_WM_PID | awk '{print $3}')") },  /* super shift q    | 选中某个窗口并强制kill */
     { MODKEY,              XK_F8,     spawn, SHCMD("~/scripts/screenkey.sh") },                                  /* super  F8        | 显示按键               */
+    { MODKEY,              XK_F10,    spawn, SHCMD("~/scripts/rofi.sh 'refresh'") },                                  /* super  F8        | 显示按键               */
+    { MODKEY,              XK_F11,    spawn, SHCMD("$DWM/statusbar/statusbar.sh icons R") },                                  /* super  F8        | 显示按键               */
+    { MODKEY,              XK_F12,    spawn, SHCMD("~/scripts/rofi.sh ' set wallpaper'") },                                  /* super  F8        | 显示按键               */
 
     /* super key : 跳转到对应tag (可附加一条命令 若目标目录无窗口，则执行该命令) */
     /* super shift key : 将聚焦窗口移动到对应tag */

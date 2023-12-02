@@ -15,7 +15,8 @@ settings() {
     amixer sset speaker unmute
     amixer sset headphone unmute
     # ~/scripts/set_screen.sh two               # 设置显示器
-    feh --bg-fill ~/Pictures/nwallpaper/2c3f9df25b784069da8cfa34a182eb43.jpg
+    feh --bg-fill ~/Pictures/nwallpaper/2406548372a5649a574aee08c5bdd862.jpg
+    systemctl --user start mpd-mpris.service
     # $DWM/statusbar/statusbar.sh icons L
 }
 
@@ -24,7 +25,7 @@ daemons() {
     $_thisdir/statusbar/statusbar.sh cron &   # 开启状态栏定时更新
     xss-lock -- ~/scripts/blurlock.sh &       # 开启自动锁屏程序
     fcitx5 &                                  # 开启输入法
-    mpd &
+    # mpd &
     # lemonade server &                         # 开启lemonade 远程剪切板支持
     flameshot &                               # 截图要跑一个程序在后台 不然无法将截图保存到剪贴板
     dunst -conf ~/scripts/config/dunst.conf & # 开启通知server

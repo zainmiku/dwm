@@ -8,29 +8,55 @@ icon_color="^c#3B102B^^b#6873790x88^"
 text_color="^c#3B102B^^b#6873790x99^"
 signal=$(echo "^s$this^" | sed 's/_//')
 
-[ ! "$(command -v mpc)" ] && echo command not found: mpc && return
+[ ! "$(command -v playerctl)" ] && echo command not found: mpc && return
 
 update() {
-    music_text="$(mpc current)"
+    music_text="$(playerctl metadata title)"
+    if [ $? -ne 0 ];then
+      music_text="$(playerctl metadata xesam:url)"
+    fi
+    if [[ ${#music_text} -gt 20 ]]; then
+        music_text="${music_text: 0: 20}..."
+    fi
     icon=" 󰝚 "
     if $music_text=~"\""; then
         text=$(echo $music_text | sed -e "s/\"\\\\\"/g")
     else
         text=" $music_text "
     fi
-    [ "$(mpc status | grep "paused")" ] && icon=" 󰐎 "
+    [ "$(playerctl status | grep "Paused")" ] && icon=" 󰐎 "
+    [ "$(playerctl status | grep "Stopped")" ] && icon=" 󰐎 "
 
     sed -i '/^export '$this'=.*$/d' $tempfile
     [ ! "$music_text" ] && return
     printf "export %s=\"%s%s%s%s%s\"\n" $this "$signal" "$icon_color" "$icon" "$text_color" "$text" >> $tempfile
 }
 
+notify(){
+  name="$(playerctl metadata title)"
+  if [ $? -ne 0 ];then
+    name="$(playerctl metadata xesam:url)"
+  fi
+
+  text="󰝚  正在播放：
+  $name"
+  album="$(playerctl metadata album)"
+  [ "$album" ] && text="$text 
+  专辑:$album"
+  artist="$(playerctl metadata artist)"
+  [ "$artist" ] && text="$text 
+  艺人:$artist"
+  notify-send -r 9527 "$text"
+
+
+}
+
 click() {
     case "$1" in
-        L) mpc toggle ;;
-        R) mpc toggle ;;
-        U) mpc prev ;;
-        D) mpc next ;;
+        L) notify ;;
+        R) playerctl play-pause;;
+        U) playerctl previous;;
+        D) playerctl next ;;
     esac
 }
 
