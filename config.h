@@ -87,6 +87,7 @@ static const Rule rules[] = {
     /** 普通优先度 */
     {"microsoft-edge-stable",NULL,                 NULL,             1 << 5,       0,          0,          0,        -1,      0}, // edge                tag -> 
     { NULL,                 "qq",                  NULL,             1 << 7,       0,          0,          1,        -1,      0}, // qq                  tag ->  无边框
+    { NULL,                 "wechat.exe",          NULL,             0,            0,          0,          1,        -1,      0}, // qq                  tag ->  无边框
     {"TelegramDesktop",     "TelegramDesktop",     NULL,             0,            0,          0,          1,        -1,      0}, // TelegramDesktop     
     {"Vncviewer",            NULL,                 NULL,             0,            1,          0,          1,        -1,      2}, // Vncviewer           浮动、无边框 屏幕顶部
     {"flameshot",            NULL,                 NULL,             0,            1,          0,          0,        -1,      0}, // 火焰截图            浮动
@@ -220,7 +221,7 @@ static Key keys[] = {
     { MODKEY|ShiftMask,    XK_q,      spawn, SHCMD("kill -9 $(xprop | grep _NET_WM_PID | awk '{print $3}')") },  /* super shift q    | 选中某个窗口并强制kill */
     { MODKEY,              XK_F8,     spawn, SHCMD("~/scripts/screenkey.sh") },                                  /* super  F8        | 显示按键               */
     { MODKEY,              XK_F10,    spawn, SHCMD("~/scripts/rofi.sh 'refresh'") },                                  /* super  F8        | 显示按键               */
-    { MODKEY,              XK_F11,    spawn, SHCMD("$DWM/statusbar/statusbar.sh icons R") },                                  /* super  F8        | 显示按键               */
+    { MODKEY,              XK_F9,     spawn, SHCMD("$DWM/statusbar/statusbar.sh icons R") },                                  /* super  F8        | 显示按键               */
     { MODKEY,              XK_F12,    spawn, SHCMD("~/scripts/rofi.sh ' set wallpaper'") },                                  /* super  F8        | 显示按键               */
 
     /* super key : 跳转到对应tag (可附加一条命令 若目标目录无窗口，则执行该命令) */

@@ -15,7 +15,7 @@ settings() {
     amixer sset speaker unmute
     amixer sset headphone unmute
     # ~/scripts/set_screen.sh two               # 设置显示器
-    feh --bg-fill ~/Pictures/nwallpaper/2406548372a5649a574aee08c5bdd862.jpg
+    feh --bg-fill ~/Pictures/nwallpaper/d2a72c762488ecb24036941065ca2c98.jpg
     systemctl --user start mpd-mpris.service
     # $DWM/statusbar/statusbar.sh icons L
 }
@@ -23,7 +23,7 @@ settings() {
 daemons() {
     [ $1 ] && sleep $1
     $_thisdir/statusbar/statusbar.sh cron &   # 开启状态栏定时更新
-    xss-lock -- ~/scripts/blurlock.sh &       # 开启自动锁屏程序
+    # xss-lock -- ~/scripts/blurlock.sh &       # 开启自动锁屏程序
     fcitx5 &                                  # 开启输入法
     # mpd &
     # lemonade server &                         # 开启lemonade 远程剪切板支持
@@ -33,7 +33,7 @@ daemons() {
     # 显卡切换
     /usr/bin/prime-offload &
     optimus-manager-qt &
-    $HOME/.config/clash/start-clash.sh edu > /dev/null 2>&1 &
+    $HOME/.config/clash/start-clash.sh ikuuu > /dev/null 2>&1 &
 }
 
 cron() {
